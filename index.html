@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand h1" href="#">Weather Dashboard</span>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3" id="searchCol">
+                <!-- Search input and list of searched cities -->
+                <div class="row">
+                    <form role="search">
+                        <input type="text" id="citySearch" placeholder="Enter City">
+                        <button id="searchButton">Search</button>
+                    </form>
+                </div>
+                <!-- Search results and history -->
+                <div class="row">
+                    <ul id="searchResults">
+                        <li>Salt Lake City</li>
+                        <li>New York</li>
+                        <li>London</li>
+                        <li>Seattle</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-9">
+                <!-- Current Weather -->
+                <div class="row-fluid" id="currentWeather">
+                    <div class="card">
+                        <div class="card-header h3">Current City</div>
+                        <div class="card-body">
+                            <h5>Temperature</h5>
+                            <h5>Humidity</h5>
+                            <h5>Wind Speed</h5>
+                            <h5>UV Index</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5 day forecast -->
+                <div class="row-fluid" id="5dayForecast">
+                    <div class="card">
+                        <div class="card-header h3">5 Day Forecast</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col border rounded">
+                                    day1
+                                </div>
+                                <div class="col border rounded">
+                                    day2
+                                </div>
+                                <div class="col border rounded">
+                                    day3
+                                </div>
+                                <div class="col border rounded">
+                                    day4
+                                </div>
+                                <div class="col border rounded">
+                                    day5
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <script src="https://code.jquery.com/jquery.js"></script>
+            <script src="script.js"></script>
+</body>
+
+</html>
