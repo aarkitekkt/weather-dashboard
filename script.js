@@ -1,13 +1,14 @@
 var searchBtn = $("#searchButton");
 var searchList = $("#searchResults");
-var clearBtn = $("#clearSearch")
+var clearBtn = $("#clearSearch");
+var queryURL = "";
 
 
 console.log("Weather Dashboard");
 
-// Add city name to list and return weather data.
 searchBtn.click(function (event) {
     event.preventDefault();
+    getWeather();
     addCity();
 });
 
@@ -26,3 +27,22 @@ function addCity() {
     }
 }
 
+// Function to build query URL.
+function buildURL() {
+    var cityName = $("#citySearch").val();
+    var APIkey = "660521d9b46c429e48d2ebff0b626ea8";
+    queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + APIkey;
+}
+
+// Function to query weather API and return weather data.
+function getWeather() {
+    buildURL();
+    console.log(queryUrl);
+
+    $.ajax({
+        url: queryUrl,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
+    })
+}
