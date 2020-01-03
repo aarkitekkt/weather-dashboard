@@ -3,6 +3,7 @@ $(document).ready(function () {
     var searchBtn = $("#searchButton");
     var searchList = $("#searchResults");
     var clearBtn = $("#clearSearch");
+    var cityName = "";
     var queryURL = "";
     var uvURL = "";
     var forecastURL = "";
@@ -20,9 +21,9 @@ $(document).ready(function () {
 
     console.log("Weather Dashboard");
 
-    searchBtn.click(function (event) {
+    searchBtn.on("click", function (event) {
         event.preventDefault();
-        var cityName = $("#citySearch").val();
+        cityName = $("#citySearch").val();
         console.log(cityName);
         buildWeatherURL();
         buildForecastUrl();
@@ -32,13 +33,13 @@ $(document).ready(function () {
     });
 
     // Clear search history when button is clicked.d
-    clearBtn.click(function () {
+    clearBtn.on("click", function () {
         searchList.empty();
     });
 
     // Function to add city to list of searched cities.
     function addCity() {
-        var cityName = $("#citySearch").val();
+
         if (cityName) {
             searchList.prepend($("<li>" + cityName + "</li>"));
             searchList = $("#searchResults");
@@ -48,7 +49,7 @@ $(document).ready(function () {
 
     // Function to build query URL.
     function buildWeatherURL() {
-        var cityName = $("#citySearch").val();
+
         if (cityName) {
             queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + APIkey;
             console.log("Weather URL");
@@ -99,7 +100,7 @@ $(document).ready(function () {
     }
 
     function buildForecastUrl() {
-        var cityName = $("#citySearch").val();
+
         if (cityName) {
             forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + APIkey;
             console.log("5 day forecast URL")
@@ -120,8 +121,6 @@ $(document).ready(function () {
         })
     }
 
-
-
     // Take weather data and display weather information in html.
     function showWeather(weatherData) {
 
@@ -138,18 +137,27 @@ $(document).ready(function () {
 
     function showForecast(forecastData) {
 
-        var day = $("<div class='col border rounded'></div>");
-        var date = $("<h5>" + forecastData.list[0].dt_txt + "</h5>");
-        var temp = $("<h5>" + forecastData.list[0].main.temp + "</h5>");
-        var humidity = $("<h5>" + forecastData.list[0].main.humidity + "</h5>");
-        var icon = $("<h5>" + forecastData.list[0].weather[0].description + "</h5>");
-        day.append(date, icon, temp, humidity);
-        forecastEl.append(day);
-        // day1El.text(forecastData.list[4].main.temp);
+        forecastEl.empty();
+
+        for (var i = 0; i < 5; i++) {
+            var day = $("<div class='col border rounded'></div>");
+            var date = $("<h5>" + forecastData.list[i].dt_txt + "</h5>");
+            var temp = $("<h5>" + "Temp: " + forecastData.list[i].main.temp + "</h5>");
+            var humidity = $("<h5>" + "Humidity: " + forecastData.list[i].main.humidity + "%" + "</h5>");
+            var icon = $("<h5>" + forecastData.list[i].weather[0].description + "</h5>");
+            day.append(date, icon, temp, humidity);
+            forecastEl.append(day);
+        }
     }
 
     // When list item is clicked, return weather for that city.
-    $("li").click(function () {
-        console.log("You clicked a list item!!!");
+    $(searchList).on("click", "li", function () {
+
+        cityName = $(this).text();
+        console.log(cityName);
+        buildWeatherURL();
+        buildForecastUrl();
+        getWeather();
+        getForecast();
     });
 });
