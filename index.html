@@ -41,23 +41,24 @@
                 <!-- Current Weather -->
                 <div class="row-fluid" id="currentWeather">
                     <div class="card">
-                        <div class="card-header h3">Current City</div>
+                        <div id="currentCity" class="card-header h3">Current City</div>
                         <div class="card-body">
-                            <h5>Temperature</h5>
-                            <h5>Humidity</h5>
-                            <h5>Wind Speed</h5>
-                            <h5>UV Index</h5>
+                            <h5>Temperature <span id="temp"></span></h5>
+                            <h5>Humidity <span id="humidity"></span></h5>
+                            <h5>Wind Speed <span id="windSpeed"></span></h5>
+                            <h5>UV Index <span id="uvIndex"></span></h5>
                         </div>
                     </div>
                 </div>
                 <!-- 5 day forecast -->
-                <div class="row-fluid" id="5dayForecast">
+                <div class="row-fluid">
                     <div class="card">
                         <div class="card-header h3">5 Day Forecast</div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col border rounded">
-                                    day1
+                            <div id="5dayForecast" class="row">
+                                <!-- <div class="col border rounded">
+                                    <h5>day1</h5>
+                                    <h5>Temp <span id="day1"></span></h5>
                                 </div>
                                 <div class="col border rounded">
                                     day2
@@ -70,7 +71,7 @@
                                 </div>
                                 <div class="col border rounded">
                                     day5
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
