@@ -13,18 +13,18 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar justify-content-center navbar-light bg-light mb-5">
         <span class="navbar-brand h1" href="#">Weather Dashboard</span>
     </nav>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2" id="searchCol">
+            <div class="col-3" id="searchCol">
                 <!-- Search input and list of searched cities -->
                 <div class="row-fluid">
-                    <form role="search">
-                        <input type="text" id="citySearch" placeholder="Enter City">
-                        <button id="searchButton">Search</button>
+                    <form class="form-inline" role="search">
+                        <input type="text" class="text-center" id="citySearch" placeholder="Enter City">
+                        <button class="btn btn-primary" id="searchButton">Search</button>
                     </form>
                 </div>
                 <!-- Search results and history -->
@@ -37,16 +37,24 @@
                     <button id="clearSearch">Clear Search History</button>
                 </div>
             </div>
-            <div class="col-10">
+            <div class="col-9">
                 <!-- Current Weather -->
                 <div class="row-fluid" id="currentWeather">
                     <div class="card">
-                        <div id="currentCity" class="card-header h3">Current City</div>
+                        <div class="row-fluid">
+                            <div id="currentCity" class="card-header h3">Current City</div>
+                        </div>
                         <div class="card-body">
-                            <h5>Temperature <span id="temp"></span></h5>
-                            <h5>Humidity <span id="humidity"></span></h5>
-                            <h5>Wind Speed <span id="windSpeed"></span></h5>
-                            <h5>UV Index <span id="uvIndex"></span></h5>
+                            <div class="row">
+                                <div class="col-4" id="weatherIcon">
+                                </div>
+                                <div class="col-8">
+                                    <h5>Temperature: <span id="temp"></span>°F</h5>
+                                    <h5>Humidity: <span id="humidity"></span>%</h5>
+                                    <h5>Wind Speed: <span id="windSpeed"></span></h5>
+                                    <h5>UV Index: <span id="uvIndex"></span></h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

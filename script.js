@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     var searchBtn = $("#searchButton");
     var searchList = $("#searchResults");
+    var cityList = [];
     var clearBtn = $("#clearSearch");
     var cityName = "";
     var queryURL = "";
@@ -18,8 +19,11 @@ $(document).ready(function () {
     var uvEl = $("#uvIndex");
     var day1El = $("#day1");
     var forecastEl = $("#5dayForecast");
+    var weatherIconEl = $("#weatherIcon");
 
     console.log("Weather Dashboard");
+
+    init();
 
     searchBtn.on("click", function (event) {
         event.preventDefault();
@@ -30,6 +34,7 @@ $(document).ready(function () {
         getWeather();
         getForecast();
         addCity();
+        storeCities();
     });
 
     // Clear search history when button is clicked.d
@@ -37,14 +42,32 @@ $(document).ready(function () {
         searchList.empty();
     });
 
+    function init() {
+
+        var storedCities = JSON.parse(localStorage.getItem("cities"));
+
+        if (storedCities !== null) {
+            cityList = storedCities;
+        } else return
+        for (var i = 0; i < storedCities.length; i++) {
+            searchList.prepend($("<li>" + storedCities[i] + "</li>"));
+        }
+    }
+
     // Function to add city to list of searched cities.
     function addCity() {
 
         if (cityName) {
+            cityList.push(cityName);
             searchList.prepend($("<li>" + cityName + "</li>"));
             searchList = $("#searchResults");
             $("#citySearch").val("");
         }
+    }
+
+    // Function to save searched city list to local storage.
+    function storeCities() {
+        localStorage.setItem("cities", JSON.stringify(cityList));
     }
 
     // Function to build query URL.
@@ -124,10 +147,15 @@ $(document).ready(function () {
     // Take weather data and display weather information in html.
     function showWeather(weatherData) {
 
-        tempEl.text(weatherData.main.temp);
-        humidityEl.text(weatherData.main.humidity);
-        windEl.text(weatherData.wind.speed);
+        weatherIconEl.empty();
+        var iconCode = weatherData.weather[0].icon;
+        var icon = $("<img src=" + "'http://openweathermap.org/img/wn/" + iconCode + "@2x.png'>");
+        tempEl.text(weatherData.main.temp.toFixed(0));
+        humidityEl.text(weatherData.main.humidity.toFixed(0));
+        windEl.text(weatherData.wind.speed.toFixed(0));
         cityEl.text(weatherData.name);
+        weatherIconEl.append(icon);
+
     }
 
     function showUVindex(uvData) {
@@ -142,9 +170,11 @@ $(document).ready(function () {
         for (var i = 0; i < 5; i++) {
             var day = $("<div class='col border rounded'></div>");
             var date = $("<h5>" + forecastData.list[i].dt_txt + "</h5>");
-            var temp = $("<h5>" + "Temp: " + forecastData.list[i].main.temp + "</h5>");
-            var humidity = $("<h5>" + "Humidity: " + forecastData.list[i].main.humidity + "%" + "</h5>");
-            var icon = $("<h5>" + forecastData.list[i].weather[0].description + "</h5>");
+            var temp = $("<h5>" + "Temp: " + forecastData.list[i].main.temp.toFixed(0) + "°F" + "</h5>");
+            var humidity = $("<h5>" + "Humidity: " + forecastData.list[i].main.humidity.toFixed(0) + "%" + "</h5>");
+            var iconCode = forecastData.list[i].weather[0].icon;
+            var icon = $("<img src=" + "'http://openweathermap.org/img/wn/" + iconCode + "@2x.png'>");
+            console.log(icon);
             day.append(date, icon, temp, humidity);
             forecastEl.append(day);
         }
