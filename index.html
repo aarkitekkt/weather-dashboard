@@ -13,31 +13,36 @@
 </head>
 
 <body>
-    <nav class="navbar justify-content-center navbar-light bg-light mb-5">
+    <nav class="navbar justify-content-center navbar-light bg-light mb-5 border-bottom">
         <span class="navbar-brand h1" href="#">Weather Dashboard</span>
     </nav>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3" id="searchCol">
+            <div class="col-12 col-sm-3" id="searchCol">
                 <!-- Search input and list of searched cities -->
                 <div class="row-fluid">
-                    <form class="form-inline" role="search">
-                        <input type="text" class="text-center" id="citySearch" placeholder="Enter City">
-                        <button class="btn btn-primary" id="searchButton">Search</button>
-                    </form>
+                    <div class="input-group justify-content-between" role="search">
+                        <div>
+                            <input type="text" class="form-control" id="citySearch" placeholder="Enter City">
+                        </div>
+                        <div>
+                            <button class="btn btn-success w-100" id="searchButton"><img src="./assets/searchicon.png"
+                                    alt="search"></button>
+                        </div>
+                    </div>
                 </div>
                 <!-- Search results and history -->
                 <div class="row-fluid">
-                    <ul id="searchResults">
+                    <ul id="searchResults" class="list-group">
                     </ul>
                 </div>
                 <!-- Button to clear search history list -->
-                <div class="row">
-                    <button id="clearSearch">Clear Search History</button>
+                <div class="row-fluid">
+                    <button id="clearSearch" class="btn btn-secondary w-100">Clear Search History</button>
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-12 col-sm-9">
                 <!-- Current Weather -->
                 <div class="row-fluid" id="currentWeather">
                     <div class="card">

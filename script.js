@@ -40,6 +40,8 @@ $(document).ready(function () {
     // Clear search history when button is clicked.d
     clearBtn.on("click", function () {
         searchList.empty();
+        cityList = [];
+        localStorage.setItem("cities", JSON.stringify(cityList));
     });
 
     function init() {
@@ -50,7 +52,7 @@ $(document).ready(function () {
             cityList = storedCities;
         } else return
         for (var i = 0; i < storedCities.length; i++) {
-            searchList.prepend($("<li>" + storedCities[i] + "</li>"));
+            searchList.prepend($("<li class='list-group-item'>" + storedCities[i] + "</li>"));
         }
     }
 
@@ -59,7 +61,7 @@ $(document).ready(function () {
 
         if (cityName) {
             cityList.push(cityName);
-            searchList.prepend($("<li>" + cityName + "</li>"));
+            searchList.prepend($("<li class='list-group-item'>" + cityName + "</li>"));
             searchList = $("#searchResults");
             $("#citySearch").val("");
         }
@@ -168,7 +170,7 @@ $(document).ready(function () {
         forecastEl.empty();
 
         for (var i = 0; i < 5; i++) {
-            var day = $("<div class='col border rounded'></div>");
+            var day = $("<div class='col-12 col-md border rounded-lg shadow-sm m-2'></div>");
             var date = $("<h5>" + forecastData.list[i].dt_txt + "</h5>");
             var temp = $("<h5>" + "Temp: " + forecastData.list[i].main.temp.toFixed(0) + "°F" + "</h5>");
             var humidity = $("<h5>" + "Humidity: " + forecastData.list[i].main.humidity.toFixed(0) + "%" + "</h5>");
