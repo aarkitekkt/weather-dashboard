@@ -54,6 +54,7 @@ $(document).ready(function () {
         for (var i = 0; i < storedCities.length; i++) {
             searchList.prepend($("<li class='list-group-item'>" + storedCities[i] + "</li>"));
         }
+
     }
 
     // Function to add city to list of searched cities.
@@ -169,16 +170,18 @@ $(document).ready(function () {
 
         forecastEl.empty();
 
-        for (var i = 0; i < 5; i++) {
-            var day = $("<div class='col-12 col-md border rounded-lg shadow-sm m-2'></div>");
-            var date = $("<h5>" + forecastData.list[i].dt_txt + "</h5>");
-            var temp = $("<h5>" + "Temp: " + forecastData.list[i].main.temp.toFixed(0) + "°F" + "</h5>");
-            var humidity = $("<h5>" + "Humidity: " + forecastData.list[i].main.humidity.toFixed(0) + "%" + "</h5>");
-            var iconCode = forecastData.list[i].weather[0].icon;
-            var icon = $("<img src=" + "'http://openweathermap.org/img/wn/" + iconCode + "@2x.png'>");
-            console.log(icon);
-            day.append(date, icon, temp, humidity);
-            forecastEl.append(day);
+        for (var i = 0; i < forecastData.list.length; i++) {
+            var time = forecastData.list[i].dt_txt.substring(11, 19);
+            if (time === "15:00:00") {
+                var day = $("<div class='col-12 col-md border rounded-lg shadow-sm m-2'></div>");
+                var date = $("<h5 class='text-center'>" + forecastData.list[i].dt_txt.substring(5, 11) + "</h5>");
+                var temp = $("<h5 class='text-center'>" + "Temp: " + forecastData.list[i].main.temp.toFixed(0) + "°F" + "</h5>");
+                var humidity = $("<h5 class='text-center'>" + "Humidity: " + forecastData.list[i].main.humidity.toFixed(0) + "%" + "</h5>");
+                var iconCode = forecastData.list[i].weather[0].icon;
+                var icon = $("<img class='mx-auto' src='http://openweathermap.org/img/wn/" + iconCode + "@2x.png'>");
+                day.append(date, icon, temp, humidity);
+                forecastEl.append(day);
+            }
         }
     }
 
