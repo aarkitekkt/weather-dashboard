@@ -1,6 +1,6 @@
 # weather-dashboard
 
-Repository: https://github.com/aarkitekkt/DayPlanner
+Repository: https://github.com/aarkitekkt/weather-dashboard
 
 URL:  https://aarkitekkt.github.io/weather-dashboard/
 ​
