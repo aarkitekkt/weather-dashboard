@@ -160,9 +160,9 @@ $(document).ready(function () {
         console.log(date);
         var iconCode = weatherData.weather[0].icon;
         var icon = $("<img src=" + "'http://openweathermap.org/img/wn/" + iconCode + "@2x.png'>");
-        tempEl.text(weatherData.main.temp.toFixed(0));
-        humidityEl.text(weatherData.main.humidity.toFixed(0));
-        windEl.text(weatherData.wind.speed.toFixed(0));
+        tempEl.text("Temperature: " + weatherData.main.temp.toFixed(0) + "°F");
+        humidityEl.text("Humidity: " + weatherData.main.humidity.toFixed(0) + "%");
+        windEl.text("Wind Speed: " + weatherData.wind.speed.toFixed(0));
         cityEl.text(weatherData.name + " - " + date);
         weatherIconEl.append(icon);
 
@@ -170,7 +170,7 @@ $(document).ready(function () {
 
     function showUVindex(uvData) {
 
-        uvEl.text(uvData.value);
+        uvEl.text("UV Index: " + uvData.value);
     }
 
     function showForecast(forecastData) {
@@ -180,12 +180,12 @@ $(document).ready(function () {
         for (var i = 0; i < forecastData.list.length; i++) {
             var time = forecastData.list[i].dt_txt.substring(11, 19);
             if (time === "15:00:00") {
-                var day = $("<div class='col-12 col-md border rounded-lg shadow-sm m-1'></div>");
+                var day = $("<div class='col-12 col-lg border rounded-lg shadow-sm m-1'></div>");
                 var date = $("<h5 class='text-center'>" + forecastData.list[i].dt_txt.substring(5, 11) + "</h5>");
                 var temp = $("<h5 class='text-center'>" + "Temp: " + forecastData.list[i].main.temp.toFixed(0) + "°F" + "</h5>");
                 var humidity = $("<h5 class='text-center'>" + "Humidity: " + forecastData.list[i].main.humidity.toFixed(0) + "%" + "</h5>");
                 var iconCode = forecastData.list[i].weather[0].icon;
-                var icon = $("<img class='mx-auto' src='http://openweathermap.org/img/wn/" + iconCode + "@2x.png'>");
+                var icon = $("<img class='d-block mx-auto' src='http://openweathermap.org/img/wn/" + iconCode + "@2x.png'>");
                 day.append(date, icon, temp, humidity);
                 forecastEl.append(day);
             }
