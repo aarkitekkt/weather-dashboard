@@ -11,12 +11,12 @@ The purpose of this application is to provide the user current weather informati
 ### Gallery
 ​
 Home:
-![Home Page](./relativeLinkToImage.png "Main Page")
+![Home Page](./screengrabs/main.JPG "Main Page")
 ​
 Responsive Design:
-![Medium Screen](./relativeLinkToImage.png "Medium Screen")
+![Medium Screen](./screengrabs/responsive1.JPG "Medium Screen")
 ​
-![Phone](./relativeLinkToImage.png "Phone")
+![Phone](./screengrabs/responsive2.JPG "Phone")
 ​
 ### Problem
 ​
