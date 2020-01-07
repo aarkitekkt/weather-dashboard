@@ -22,15 +22,18 @@
             <div class="col-12 col-sm-3" id="searchCol">
                 <!-- Search input and list of searched cities -->
                 <div class="row-fluid">
-                    <div class="input-group justify-content-between mb-2" role="search">
-                        <div>
-                            <input type="text" class="form-control" id="citySearch" placeholder="Enter City">
+                    <form action="">
+                        <div class="form-group justify-content-between mb-2" role="search">
+                            <div>
+                                <input type="text" class="form-control w-100 mb-2" id="citySearch"
+                                    placeholder="Enter City">
+                            </div>
+                            <div>
+                                <button class="btn btn-success w-10" id="searchButton"><img
+                                        src="./assets/searchicon.png" alt="search"></button>
+                            </div>
                         </div>
-                        <div>
-                            <button class="btn btn-success w-100" id="searchButton"><img src="./assets/searchicon.png"
-                                    alt="search"></button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <!-- Search results and history -->
                 <div class="row-fluid">

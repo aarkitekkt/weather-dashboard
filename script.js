@@ -52,16 +52,20 @@ $(document).ready(function () {
             cityList = storedCities;
         } else return
         for (var i = 0; i < storedCities.length; i++) {
-            searchList.prepend($("<li class='list-group-item'>" + storedCities[i] + "</li>"));
+            searchList.append($("<li class='list-group-item'>" + storedCities[i] + "</li>"));
+            cityName = storedCities[0];
+            buildWeatherURL();
+            buildForecastUrl();
+            getWeather();
+            getForecast();
         }
-
     }
 
     // Function to add city to list of searched cities.
     function addCity() {
 
         if (cityName) {
-            cityList.push(cityName);
+            cityList.unshift(cityName);
             searchList.prepend($("<li class='list-group-item'>" + cityName + "</li>"));
             searchList = $("#searchResults");
             $("#citySearch").val("");
@@ -151,12 +155,15 @@ $(document).ready(function () {
     function showWeather(weatherData) {
 
         weatherIconEl.empty();
+        var dateobj = new Date().toString();
+        var date = dateobj.substring(0, 15);
+        console.log(date);
         var iconCode = weatherData.weather[0].icon;
         var icon = $("<img src=" + "'http://openweathermap.org/img/wn/" + iconCode + "@2x.png'>");
         tempEl.text(weatherData.main.temp.toFixed(0));
         humidityEl.text(weatherData.main.humidity.toFixed(0));
         windEl.text(weatherData.wind.speed.toFixed(0));
-        cityEl.text(weatherData.name);
+        cityEl.text(weatherData.name + " - " + date);
         weatherIconEl.append(icon);
 
     }
@@ -173,7 +180,7 @@ $(document).ready(function () {
         for (var i = 0; i < forecastData.list.length; i++) {
             var time = forecastData.list[i].dt_txt.substring(11, 19);
             if (time === "15:00:00") {
-                var day = $("<div class='col-12 col-md border rounded-lg shadow-sm m-2'></div>");
+                var day = $("<div class='col-12 col-md border rounded-lg shadow-sm m-1'></div>");
                 var date = $("<h5 class='text-center'>" + forecastData.list[i].dt_txt.substring(5, 11) + "</h5>");
                 var temp = $("<h5 class='text-center'>" + "Temp: " + forecastData.list[i].main.temp.toFixed(0) + "°F" + "</h5>");
                 var humidity = $("<h5 class='text-center'>" + "Humidity: " + forecastData.list[i].main.humidity.toFixed(0) + "%" + "</h5>");
